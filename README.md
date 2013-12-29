@@ -9,6 +9,12 @@ hornibills
 
 一些想法借鉴了[iodocs](http://github.com/mashery/iodocs)
 
+##长啥样？
+
+[示例](http://xiniao.sinaapp.com/)
+
+因为用的是sae，所以不支持本地修改，但是看看样子足够了。
+
 ##犀鸟如何部署？
 
 犀鸟采用**bootstrap**+**angularjs**+**php**开发。
