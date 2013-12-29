@@ -117,6 +117,23 @@ function Api($scope, $http, $routeParams,$location, $anchorScroll,$timeout) {
         $location.hash(old);
     };
 
+    $scope.remove = function(collection, item){
+        if(confirm("确认删除?")) {
+            for(var i = 0; i < collection.length; i++) {
+                if(collection[i] == item) {
+                    collection.splice(i, 1);
+                }
+            }
+        }
+    };
+    $scope.add_param = function(current){
+        var copy = angular.copy(empty.params[0]);
+        current.params.push(copy);
+    };
+    $scope.add_response = function(current){
+        var copy = angular.copy(empty.response[0]);
+        current.response.push(copy);
+    };
 
 
 }

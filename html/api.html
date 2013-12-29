@@ -7,8 +7,6 @@
     <div class="btn-group-vertical">
         <button  class="btn btn-success" ng-click="add();">Add</button>
         <button  class="btn btn-default btn-xs" ng-click="menu=!menu">{{!menu?'展开':'收起'}}目录</button>
-
-
             <a ng-show="!!menu" ng-repeat="item in list" class="btn btn-default btn-xs" ng-href="#/api/{{href}}/{{item.name}}">{{item.name}}</a>
     </div>
 </div>
@@ -45,6 +43,9 @@
                             <th>默认值</th>
                             <th>类型</th>
                             <th>描述</th>
+                            <th>
+                                <button class="btn btn-success" ng-click="add_param(current)">新增</button>
+                            </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -58,6 +59,9 @@
                                    </select>
                             </td>
                             <td><textarea style="width: 400px;" ng-model="param.Description"></textarea></td>
+                            <td>
+                                <button class="btn btn-danger" ng-click="remove(current.params, param)">删除</button>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -74,6 +78,9 @@
                             <th>默认值</th>
                             <th>类型</th>
                             <th>描述</th>
+                            <th>
+                                <button class="btn btn-success" ng-click="add_response(current)">新增</button>
+                            </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -87,6 +94,9 @@
                                 </select>
                             </td>
                             <td><textarea style="width: 400px;" ng-model="param.Description"></textarea></td>
+                            <td>
+                                <button class="btn btn-danger" ng-click="remove(current.response, param)">删除</button>
+                            </td>
                         </tr>
                         </tbody>
                     </table>
