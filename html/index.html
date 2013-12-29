@@ -15,7 +15,9 @@
                     <img class="media-object" src="img/{{$index % 6}}.jpg" alt="...">
                 </a>
                 <div class="media-body">
-                    <h4 class="media-heading"><a href="#/api/{{item.href}}" title="{{item.description}}">{{item.name}}</a>
+                    <h4 class="media-heading">
+                        <a href="#/api/{{item.href}}" title="{{item.description}}">{{item.name}}</a>
+                        <small title="当前分类的主键"> - {{item.href}}</small>
                         <a class="btn btn-info btn-xs pull-right" href="#/add/{{item.href}}">编辑</a>
                     </h4>
                     <p>{{item.description}}</p>
