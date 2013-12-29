@@ -39,8 +39,8 @@
                         <thead>
                         <tr>
                             <th>参数名</th>
-                            <th>必传</th>
                             <th>默认值</th>
+                            <th>必传</th>
                             <th>类型</th>
                             <th>描述</th>
                             <th>
@@ -51,7 +51,7 @@
                         <tbody>
                         <tr ng-repeat="param in current.params">
                             <td><input type="text" ng-model="param.Name"/></td>
-                            <td><input type="text" ng-model="param.Name"/></td>
+                            <td><input type="text" ng-model="param.Default"/></td>
                             <td><input type="checkbox" ng-true-value="Y" ng-false-value="N" ng-model="param.Required"/></td>
                             <td>
                                 <select ng-model="param.Type">
@@ -74,8 +74,8 @@
                         <thead>
                         <tr>
                             <th>参数名</th>
-                            <th>必传</th>
                             <th>默认值</th>
+                            <th>必传</th>
                             <th>类型</th>
                             <th>描述</th>
                             <th>
@@ -86,7 +86,7 @@
                         <tbody>
                         <tr ng-repeat="param in current.response">
                             <td><input type="text" ng-model="param.Name"/></td>
-                            <td><input type="text" ng-model="param.Name"/></td>
+                            <td><input type="text" ng-model="param.Default"/></td>
                             <td><input type="checkbox" ng-true-value="Y" ng-false-value="N" ng-model="param.Required"/></td>
                             <td>
                                 <select ng-model="param.Type">
@@ -119,32 +119,38 @@
     <div ng-show="!current">
         <div class="panel panel-default" ng-repeat="item in list">
             <div id="{{item.name}}" class="panel-heading">
-                <h3 class="panel-title"> <button class="btn btn-info btn-xs" ng-click="edit(item);">edit</button> {{item.name}}</h3>
+                <h3 class="panel-title">{{item.name}}
+                    <button class="btn btn-info btn-xs pull-right" ng-click="edit(item);">edit</button>
+                    <button class="btn btn-danger btn-xs pull-right" style="margin-right: 5px;" ng-click="remove(list, item); save_me();">delete</button>
+                </h3>
                 <h4><kbd>{{item.url}}</kbd></h4>
             </div>
             <div class="panel-body">
                 <div class="alert alert-info">{{item.description}}</div>
-                <h5>请求参数</h5>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>参数名</th>
-                        <th>必传</th>
-                        <th>默认值</th>
-                        <th>类型</th>
-                        <th>描述</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="param in item.params">
-                        <td>{{param.Name}}</td>
-                        <td>{{param.Required}}</td>
-                        <td>{{param.Default || "-"}}</td>
-                        <td>{{param.Type}}</td>
-                        <td>{{param.Description}}</td>
-                    </tr>
-                    </tbody>
-                </table>
+                <div ng-show="item.params.length > 0">
+                    <h5>请求参数</h5>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>参数名</th>
+                            <th>必传</th>
+                            <th>默认值</th>
+                            <th>类型</th>
+                            <th>描述</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="param in item.params">
+                            <td>{{param.Name}}</td>
+                            <td>{{param.Required}}</td>
+                            <td>{{param.Default || "-"}}</td>
+                            <td>{{param.Type}}</td>
+                            <td>{{param.Description}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div ng-show="item.response.length > 0">
                 <h5>返回值</h5>
                 <table class="table">
                     <thead>
@@ -166,6 +172,7 @@
                     </tr>
                     </tbody>
                 </table>
+                    </div>
                 <h4>Demo:</h4>
                 <div>
                     <pre>{{item.demo}}</pre>

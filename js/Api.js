@@ -66,13 +66,7 @@ function Api($scope, $http, $routeParams,$location, $anchorScroll,$timeout) {
         $scope.current = angular.copy(empty);
         $scope.isNew = true;
     };
-    $scope.save = function(){
-        if($scope.isNew) {
-            $scope.list.unshift($scope.current);
-        }
-        else {
-            angular.extend($scope.edit_api, $scope.current);
-        }
+    $scope.save_me = function(){
         $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
         $http.post("php/save.php",
                 "content=" + encodeURIComponent(angular.toJson($scope.list, true)) + "&href=" + href
@@ -84,6 +78,15 @@ function Api($scope, $http, $routeParams,$location, $anchorScroll,$timeout) {
                 alert("add failed");
                 console.log(arguments);
             });
+    };
+    $scope.save = function(){
+        if($scope.isNew) {
+            $scope.list.unshift($scope.current);
+        }
+        else {
+            angular.extend($scope.edit_api, $scope.current);
+        }
+        $scope.save_me();
     };
     $scope.edit = function(api) {
         var copy = angular.copy(api);

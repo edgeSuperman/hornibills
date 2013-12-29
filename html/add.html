@@ -1,24 +1,25 @@
 <ol class="breadcrumb">
     <li><a href="#/">Home</a></li>
-    <li class="active">添加分类</li>
+    <li class="active">{{href?'修改':'添加'}}分类</li>
 </ol>
 
     <form class="form-horizontal" role="form">
         <div class="form-group">
             <label for="name" class="col-sm-2 control-label">分类名:</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" ng-model="name" id="name" placeholder="分类(in chinese)">
+                <input type="text" class="form-control" ng-model="current.name" id="name" placeholder="分类(in chinese)">
             </div>
         </div>
-        <div class="form-group">
+        <div ng-if="!href" class="form-group">
             <label for="module" class="col-sm-2 control-label">英文名:</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="module" ng-model="href" placeholder="分类(in english)">
+                <input type="text" class="form-control" id="module" ng-model="current.href" placeholder="分类(in english)">
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <textarea  name="description" ng-model="description" style="width: 100%; height: 100px;"  placeholder="描述"></textarea>
+            <label for="module" class="col-sm-2 control-label">描述:</label>
+            <div class="col-sm-10">
+                <textarea  name="description" ng-model="current.description" style="width: 100%; height: 100px;"  placeholder="描述"></textarea>
             </div>
         </div>
         <div class="form-group">
