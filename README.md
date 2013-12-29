@@ -7,7 +7,7 @@ hornibills
 
 力求用最简单的方式部署您的文档系统，拥有最方便的文档管理。
 
-一些想法借鉴了(iodocs)[http://github.com/mashery/iodocs]
+一些想法借鉴了[iodocs](http://github.com/mashery/iodocs)
 
 ##犀鸟如何部署？
 
