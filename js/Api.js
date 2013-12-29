@@ -71,15 +71,48 @@ function Api($scope, $http, $routeParams,$location, $anchorScroll,$timeout) {
         $http.post("php/save.php",
                 "content=" + encodeURIComponent(angular.toJson($scope.list, true)) + "&href=" + href
             ).success(function (data) {
+                var name;
+                if($scope.edit_api) {
+                    name = $scope.edit_api.name;
+                }
+
                 $scope.isNew = false;
                 $scope.current = null;
                 $scope.edit_api = null;
+
+                $timeout(function(){
+                    if(name) {
+                        $scope.scrollTo(name);
+                    }
+                });
             }).error(function (data, status, headers, config) {
                 alert("add failed");
                 console.log(arguments);
             });
+
     };
+
+    var check_unique = function(){
+        var r = true;
+        if($scope.edit_api && $scope.edit_api.name == $scope.current.name) {
+            return r;
+        }
+        angular.forEach($scope.list, function(item){
+        if($scope.current.name == item.name) {
+                r = false;
+            }
+        });
+        return r;
+    };
+
     $scope.save = function(){
+        if($scope.apiForm.$invalid) {
+            return;
+        }
+        if(!check_unique()) {
+            alert("接口名重复了，重新起一个吧");
+            return;
+        }
         if($scope.isNew) {
             $scope.list.unshift($scope.current);
         }

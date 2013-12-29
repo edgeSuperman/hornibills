@@ -53,6 +53,10 @@ function Add($scope, $http, $location, $routeParams) {
             });
     };
     $scope.save = function () {
+        console.log($scope.typeForm);
+        if($scope.typeForm.$invalid) {
+            return;
+        }
         if (!href) {
             if(check_unique() == false) {
                 alert("英文名和别的分类冲突了，换一个吧");

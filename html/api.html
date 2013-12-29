@@ -14,17 +14,19 @@
 <div>
 
     <div ng-show="current" >
-        <form class="form-horizontal" role="form">
+        <form class="form-horizontal" name="apiForm" role="form">
             <div class="form-group">
                 <label for="name" class="col-sm-2 control-label">接口名:</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" ng-model="current.name" id="name" placeholder="接口名称">
+                    <input type="text" required class="form-control" name="name" ng-model="current.name" id="name" placeholder="接口名称">
+                    <span class=" error" ng-show="apiForm.name.$error.required">请填写分类名</span>
                 </div>
             </div>
             <div class="form-group">
-                <label for="url" class="col-sm-2 control-label">url:</label>
+                <label for="url"  class="col-sm-2 control-label">url:</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="url" ng-model="current.url" placeholder="url">
+                    <input type="text" required class="form-control" name="url" id="url" ng-model="current.url" placeholder="url">
+                    <span class=" error" ng-show="apiForm.url.$error.required">请填写分类名</span>
                 </div>
             </div>
             <div class="form-group">
