@@ -5,7 +5,9 @@
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3>分类</h3>
+        <h3>分类 -
+        <button class="btn btn-xs btn-info" ng-click="show_edit = !show_edit">{{!show_edit?'编辑分类':'关闭编辑'}}</button>
+        </h3>
     </div>
     <div class="panel-body">
 
@@ -18,7 +20,9 @@
                     <h4 class="media-heading">
                         <a href="#/api/{{item.href}}" title="{{item.description}}">{{item.name}}</a>
                         <small title="当前分类的主键"> - {{item.href}}</small>
-                        <a class="btn btn-info btn-xs pull-right" href="#/add/{{item.href}}">编辑</a>
+                        <button ng-show="show_edit" ng-click="remove(item)" class="btn btn-danger btn-xs pull-right">删除</button>
+                        <a ng-show="show_edit" class="btn btn-info btn-xs pull-right" href="#/add/{{item.href}}" style="margin-right: 5px;">编辑</a>
+
                     </h4>
                     <p>{{item.description}}</p>
                 </div>
