@@ -1,11 +1,25 @@
+<style type="text/css">
+    .menu {
+        list-style: none;
+    }
+</style>
 
 <ol class="breadcrumb">
     <li><a href="#/">Home</a></li>
     <li class="active">{{href}}</li>
 </ol>
+<div style="position: fixed; left: 0; top: 100px;" >
+    <div class="btn-group-vertical">
+        <button  class="btn btn-default" ng-click="add();">Add</button>
+        <button  class="btn btn-default btn-xs" ng-click="menu=!menu">{{!menu?'展开':'收起'}}目录</button>
+
+
+            <a ng-show="!!menu" ng-repeat="item in list" class="btn btn-default btn-xs" ng-href="#/api/{{href}}/{{item.name}}">{{item.name}}</a>
+    </div>
+</div>
 
 <div>
-    <button style="position: fixed; left: 0; top: 100px;" class="btn btn-default" ng-click="add();">Add</button>
+
     <div ng-show="current" >
         <form class="form-horizontal" role="form">
             <div class="form-group">
@@ -99,7 +113,7 @@
 
     <div ng-show="!current">
         <div class="panel panel-default" ng-repeat="item in list">
-            <div class="panel-heading">
+            <div id="{{item.name}}" class="panel-heading">
                 <h3 class="panel-title"> <button class="btn btn-default" ng-click="edit(item);">edit</button> {{item.name}}</h3>
                 <h4>{{item.url}}</h4>
             </div>

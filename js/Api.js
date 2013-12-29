@@ -2,8 +2,7 @@
  * Created by danghongyang on 13-12-27.
  */
 
-function Api($scope, $http, $routeParams) {
-
+function Api($scope, $http, $routeParams,$location, $anchorScroll,$timeout) {
 
     var href = $routeParams.href;
 
@@ -12,6 +11,10 @@ function Api($scope, $http, $routeParams) {
     var json = "data/" + href +".json";
     $http.get(json + "?t=" + (new Date()).getTime()).success(function(data){
         $scope.list = data;
+        $timeout(function(){
+            var id = $routeParams.name;
+            $scope.scrollTo(id);
+        });
     }).error(function(){
             $scope.list = [];
         });
@@ -104,6 +107,14 @@ function Api($scope, $http, $routeParams) {
         onLoad: function(){
             console.log(123);
         }
+    };
+
+    $scope.scrollTo = function(id){
+        var old = $location.hash();
+        $location.hash(id);
+        $anchorScroll();
+        //reset to old to keep any additional routing logic from kicking in
+        $location.hash(old);
     };
 
 

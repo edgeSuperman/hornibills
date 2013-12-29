@@ -43,6 +43,9 @@
                     }).when('/api/:href', {
                         templateUrl: 'html/api.html',
                         controller: 'Api'
+                    }).when('/api/:href/:name', {
+                        templateUrl: 'html/api.html',
+                        controller: 'Api'
                     }).when('/about', {
                         templateUrl: 'html/about.html',
                         controller: 'About'
@@ -50,6 +53,14 @@
                         redirectTo: '/'
                     });
         }]);
+
+    app.run(function($rootScope, $location, $anchorScroll, $routeParams) {
+        //when the route is changed scroll to the proper element.
+        $rootScope.$on('$routeChangeSuccess', function(newRoute, oldRoute) {
+            $location.hash($routeParams.scrollTo);
+            $anchorScroll();
+        });
+    });
 </script>
 </body>
 </html>
