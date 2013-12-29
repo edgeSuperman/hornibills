@@ -10,7 +10,7 @@
 </ol>
 <div style="position: fixed; left: 0; top: 100px;" >
     <div class="btn-group-vertical">
-        <button  class="btn btn-default" ng-click="add();">Add</button>
+        <button  class="btn btn-success" ng-click="add();">Add</button>
         <button  class="btn btn-default btn-xs" ng-click="menu=!menu">{{!menu?'展开':'收起'}}目录</button>
 
 
@@ -104,7 +104,7 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button ng-click="save();" type="submit" class="btn btn-default">保存</button>
+                    <button ng-click="save();" type="submit" class="btn btn-success">保存</button>
                     <button ng-click="cancel();" type="submit" class="btn btn-default">取消</button>
                 </div>
             </div>
@@ -114,11 +114,11 @@
     <div ng-show="!current">
         <div class="panel panel-default" ng-repeat="item in list">
             <div id="{{item.name}}" class="panel-heading">
-                <h3 class="panel-title"> <button class="btn btn-default" ng-click="edit(item);">edit</button> {{item.name}}</h3>
-                <h4>{{item.url}}</h4>
+                <h3 class="panel-title"> <button class="btn btn-info btn-xs" ng-click="edit(item);">edit</button> {{item.name}}</h3>
+                <h4><kbd>{{item.url}}</kbd></h4>
             </div>
             <div class="panel-body">
-                <p>{{item.description}}</p>
+                <div class="alert alert-info">{{item.description}}</div>
                 <h5>请求参数</h5>
                 <table class="table">
                     <thead>
