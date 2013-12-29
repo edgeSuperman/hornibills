@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>犀鸟</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <link rel="stylesheet" href="lib/bootstrap.min.css"/>
+    <link rel="stylesheet" href="lib/codemirror.css"/>
+
+    <script src="lib/angular.min.js"></script>
+    <script src="lib/angular.ngRoute.js"></script>
+    <style type="text/css">
+        body {
+            padding-bottom: 40px;
+        }
+    </style>
+</head>
+<body>
+<div class="container" ng-app="Bird">
+    <h1><img src="img/bird.png" />犀鸟</h1>
+    <div ng-view></div>
+    <footer>
+        <div class="site-info">
+            <a href="/#about">关于犀鸟</a>
+            Copyright © 2013. Create By <a href="mailto:danghongyang@baidu.com">danghongyang</a> </div>
+    </footer>
+</div>
+<script src="js/Index.js"></script>
+<script src="js/Add.js"></script>
+<script src="js/Api.js"></script>
+<script src="js/About.js"></script>
+<script>
+    var app = angular.module("Bird", ["ngRoute"]);
+
+    app.config(['$routeProvider',
+        function ($routeProvider) {
+            $routeProvider.
+                    when('/', {
+                        templateUrl: 'html/index.html',
+                        controller: 'Index'
+                    }).when('/add', {
+                        templateUrl: 'html/add.html',
+                        controller: 'Add'
+                    }).when('/api/:href', {
+                        templateUrl: 'html/api.html',
+                        controller: 'Api'
+                    }).when('/about', {
+                        templateUrl: 'html/about.html',
+                        controller: 'About'
+                    }).otherwise({
+                        redirectTo: '/'
+                    });
+        }]);
+</script>
+</body>
+</html>

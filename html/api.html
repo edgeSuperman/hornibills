@@ -1,0 +1,158 @@
+
+<ol class="breadcrumb">
+    <li><a href="#/">Home</a></li>
+    <li class="active">{{href}}</li>
+</ol>
+
+<div>
+    <button style="position: fixed; left: 0; top: 100px;" class="btn btn-default" ng-click="add();">Add</button>
+    <div ng-show="current" >
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <label for="name" class="col-sm-2 control-label">接口名:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" ng-model="current.name" id="name" placeholder="接口名称">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="url" class="col-sm-2 control-label">url:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="url" ng-model="current.url" placeholder="url">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <textarea name="description"  ng-model="current.description" style="width: 100%; height: 100px;"  placeholder="描述"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">参数:</label>
+                <div class="col-sm-10">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>参数名</th>
+                            <th>必传</th>
+                            <th>默认值</th>
+                            <th>类型</th>
+                            <th>描述</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="param in current.params">
+                            <td><input type="text" ng-model="param.Name"/></td>
+                            <td><input type="text" ng-model="param.Name"/></td>
+                            <td><input type="checkbox" ng-true-value="Y" ng-false-value="N" ng-model="param.Required"/></td>
+                            <td>
+                                <select ng-model="param.Type">
+                                    <option ng-repeat="item in TYPES" ng-select="param.Type == item" value="{{item}}">{{item}}</option>
+                                   </select>
+                            </td>
+                            <td><textarea style="width: 400px;" ng-model="param.Description"></textarea></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">参数:</label>
+                <div class="col-sm-10">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>参数名</th>
+                            <th>必传</th>
+                            <th>默认值</th>
+                            <th>类型</th>
+                            <th>描述</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="param in current.response">
+                            <td><input type="text" ng-model="param.Name"/></td>
+                            <td><input type="text" ng-model="param.Name"/></td>
+                            <td><input type="checkbox" ng-true-value="Y" ng-false-value="N" ng-model="param.Required"/></td>
+                            <td>
+                                <select ng-model="param.Type">
+                                    <option ng-repeat="item in TYPES" ng-select="param.Type == item" value="{{item}}">{{item}}</option>
+                                </select>
+                            </td>
+                            <td><textarea style="width: 400px;" ng-model="param.Description"></textarea></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <textarea ng-model="current.demo" style="width: 100%;height: 300px;"></textarea>
+                    </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button ng-click="save();" type="submit" class="btn btn-default">保存</button>
+                    <button ng-click="cancel();" type="submit" class="btn btn-default">取消</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div ng-show="!current">
+        <div class="panel panel-default" ng-repeat="item in list">
+            <div class="panel-heading">
+                <h3 class="panel-title"> <button class="btn btn-default" ng-click="edit(item);">edit</button> {{item.name}}</h3>
+                <h4>{{item.url}}</h4>
+            </div>
+            <div class="panel-body">
+                <p>{{item.description}}</p>
+                <h5>请求参数</h5>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>参数名</th>
+                        <th>必传</th>
+                        <th>默认值</th>
+                        <th>类型</th>
+                        <th>描述</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="param in item.params">
+                        <td>{{param.Name}}</td>
+                        <td>{{param.Required}}</td>
+                        <td>{{param.Default || "-"}}</td>
+                        <td>{{param.Type}}</td>
+                        <td>{{param.Description}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <h5>返回值</h5>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>参数名</th>
+                        <th>必传</th>
+                        <th>默认值</th>
+                        <th>类型</th>
+                        <th>描述</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="param in item.response">
+                        <td>{{param.Name}}</td>
+                        <td>{{param.Required}}</td>
+                        <td>{{param.Default || "-"}}</td>
+                        <td>{{param.Type}}</td>
+                        <td>{{param.Description}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <h4>Demo:</h4>
+                <div>
+                    <pre>{{item.demo}}</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

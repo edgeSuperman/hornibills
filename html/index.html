@@ -1,0 +1,22 @@
+
+<ol class="breadcrumb">
+    <li class="active">Home</li>
+</ol>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>分类</h3>
+    </div>
+    <div class="panel-body">
+        <ul>
+            <li ng-repeat="item in list">
+                <a href="#/api/{{item.href}}" title="{{item.description}}">{{item.name}}</a>
+            </li>
+        </ul>
+    </div>
+    <div class="panel-footer">
+        <a class="btn btn-default" href="#/add">新建分类</a>
+    </div>
+    </div>
+
+

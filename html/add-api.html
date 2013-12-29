@@ -1,0 +1,89 @@
+<form class="form-horizontal" role="form">
+    <button class="btn btn-small btn-default" ng-click="isCollapsed = !isCollapsed">基本信息</button>
+    <div collapse="isCollapsed">
+        <div class="control-group">
+            <label for="name" class=" control-label">接口名:</label>
+
+            <div class="controls">
+                <input type="text" class="form-control" ng-model="current.name" id="name" placeholder="接口名称">
+            </div>
+        </div>
+        <div class="control-group">
+            <label for="url" class=" control-label">url:</label>
+
+            <div class="controls">
+                <input type="text" class="form-control" id="url" ng-model="current.url" placeholder="url">
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <textarea name="description" ng-model="current.description" style="width: 100%; height: 100px;" placeholder="描述"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-small btn-default" ng-click="isParamCollapsed = !isParamCollapsed">参数</button>
+    <div collapse="!isParamCollapsed">
+        <div class="control-group">
+            <div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>参数名</th>
+                        <th>必传</th>
+                        <th>默认值</th>
+                        <th>类型</th>
+                        <th>描述</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="param in current.params">
+                        <td><input type="text" ng-model="param.Name"/></td>
+                        <td><input type="text" ng-model="param.Name"/></td>
+                        <td><input type="checkbox" ng-true-value="Y" ng-false-value="N" ng-model="param.Required"/></td>
+                        <td>
+
+                            <input type="text" ng-model="param.Type"/>
+                        </td>
+                        <td><input type="text" ng-model="param.Description"/></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <button class="btn btn-small btn-default" ng-click="isReturnCollapsed = !isReturnCollapsed">返回值</button>
+    <div collapse="!isReturnCollapsed">
+        <div class="control-group">
+
+            <div>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>参数名</th>
+                        <th>必传</th>
+                        <th>required</th>
+                        <th>类型</th>
+                        <th>描述</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="param in current.response">
+                        <td><input type="text" ng-model="param.Name"/></td>
+                        <td><input type="text" ng-model="param.Name"/></td>
+                        <td><input type="checkbox" ng-true-value="Y" ng-false-value="N" ng-model="param.Required"/></td>
+                        <td><input type="text" ng-model="param.Type"/></td>
+                        <td><input type="text" ng-model="param.Description"/></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <!--   <button ng-click="save();" type="submit" class="btn btn-default">保存</button>
+               <button ng-click="cancel();" type="submit" class="btn btn-default">取消</button> -->
+        </div>
+    </div>
+</form>
