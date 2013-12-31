@@ -13,4 +13,4 @@ $content = json_decode($content, true);
 $content = json_encode($content);
 
 $r = file_put_contents("../data/".$href.".json", $content);
-$r = file_put_contents("../data/".$href."[".date("Y-m-d")."]".time().".json", $content);
+$r = file_put_contents("../data/".$href."-".date("Y-m-d")."-".time().".json", $content);
