@@ -12,6 +12,6 @@ $content = json_encode($content);
 
 $filename = "../data/".$href.".json";
 
-copy($filename, "../data/".$href."[".date("Y-m-d")."]".time().".json");
+copy($filename, "../data/".$href."-".date("Y-m-d")."-".time().".json");
 
 unlink($filename);
