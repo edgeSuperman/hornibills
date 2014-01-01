@@ -133,8 +133,10 @@
 
     <div ng-show="!current">
         <div class="clearfix" style="margin: 5px;">
-            <input placeholder="search here" class="form-control input-sm pull-right" ng-model="search" style="width: 300px;" type="search"/>
-        </div>
+            <label class="pull-right" for="search">
+                <input placeholder="search here" id="search" class="form-control input-sm " ng-model="search" style="width: 300px;" type="search"/>
+            </label>
+           </div>
         <div class="panel panel-default" ng-repeat="item in list|filter: search">
             <div id="{{item.name}}" class="panel-heading">
                 <h3 class="panel-title">
