@@ -6,3 +6,7 @@
 .idea/workspace.xml
 
 .idea/encodings.xml
+
+data/123.json
+
+*.json
