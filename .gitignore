@@ -8,3 +8,7 @@
 .idea/encodings.xml
 
 php/aip.php
+
+data/type.json
+
+data/*.json
