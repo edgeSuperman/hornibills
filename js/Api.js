@@ -174,5 +174,8 @@ function Api($scope, $http, $routeParams,$location, $anchorScroll,$timeout) {
         current.response.push(copy);
     };
 
+    $scope.back = function(){
+        $scope.scrollTo("top");
+    };
 
 }
