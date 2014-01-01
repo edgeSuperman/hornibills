@@ -22,7 +22,7 @@ function Api($scope, $http, $routeParams,$location, $anchorScroll,$timeout) {
     var empty = {
         "name":"接口名",
         "url": "接口url",
-        "method": "",
+        "method": "GET",
         "description": "接口描述",
         "params": [
             {
@@ -61,6 +61,9 @@ function Api($scope, $http, $routeParams,$location, $anchorScroll,$timeout) {
 
     $scope.TYPES = [
        "string", "int"
+    ];
+    $scope.METHODS = [
+        "GET", "POST"
     ];
     $scope.add = function(){
         $scope.current = angular.copy(empty);
