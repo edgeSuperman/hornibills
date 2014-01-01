@@ -7,7 +7,7 @@ function Add($scope, $http, $location, $routeParams) {
     var href = $routeParams.href;
     $scope.href = href;
     $http.get(json + "?t=" + (new Date()).getTime()).success(function (data) {
-        $scope.list = data;
+        $scope.list = data || [];
 
         if (href) {
             angular.forEach($scope.list, function (item) {
@@ -25,7 +25,9 @@ function Add($scope, $http, $location, $routeParams) {
             };
         }
         console.log($scope.list);
-    });
+    }).error(function(){
+            $scope.list = [];
+        });
 
     var check_unique = function(){
         var r = true;
