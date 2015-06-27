@@ -193,7 +193,32 @@
                     </tr>
                     </tbody>
                 </table>
-                    </div>
+                </div>
+                <div ng-show="item.params.length > 0">
+                    <h5>接口测试</h5>
+                    <form class="form-horizontal" name="testForm" method="{{item.method}}" action="{{item.url}}" target="_blank">
+                        <div class="form-group">
+                            <div class="col-sm-10">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>参数名</th>
+                                        <th>值</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="param in item.params">
+                                        <td>{{param.Name}}</td>
+                                        <td><input type="text" class="form-control" name="{{param.Name}}" value="{{param.Default}}" /></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <p><button class="btn btn-primary">测试</button></p>
+                        <p>&nbsp;</p>
+                    </form>
+                </div>
                 <h4 ng-show="item.demo">Demo:</h4>
                 <div ng-show="item.demo">
                     <pre>{{item.demo}}</pre>
