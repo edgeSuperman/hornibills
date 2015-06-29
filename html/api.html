@@ -5,9 +5,8 @@
 </ol>
 <div style="position: fixed; left: 0; top: 100px;" >
     <div class="btn-group-vertical">
-        <button  class="btn btn-success" ng-click="add();">Add</button>
-        <button  class="btn btn-default btn-xs" ng-click="menu=!menu">{{!menu?'展开':'收起'}}目录</button>
-            <a ng-show="!!menu" ng-repeat="item in list" class="btn btn-default btn-xs" ng-href="#/api/{{href}}/{{item.name}}">{{item.name}}</a>
+        <button  class="btn btn-success" ng-click="add();" ng-show="WRITE_ABLE">Add</button>
+            <a ng-repeat="item in list" class="btn btn-default btn-xs" ng-href="#/api/{{href}}/{{item.name}}">{{item.name}}</a>
     </div>
 </div>
 
@@ -141,8 +140,8 @@
             <div id="{{item.name}}" class="panel-heading">
                 <h3 class="panel-title">
                     {{item.name}}
-                    <button class="btn btn-info btn-xs pull-right" ng-click="edit(item);">edit</button>
-                    <button class="btn btn-danger btn-xs pull-right" style="margin-right: 5px;" ng-click="remove(list, item); save_me();">delete</button>
+                    <button class="btn btn-info btn-xs pull-right" ng-click="edit(item);" ng-show="WRITE_ABLE">edit</button>
+                    <button class="btn btn-danger btn-xs pull-right" style="margin-right: 5px;" ng-click="remove(list, item); save_me();" ng-show="WRITE_ABLE">delete</button>
                 </h3>
                 <h4><kbd>{{item.method || 'GET'}}</kbd> - <kbd>{{item.url}}</kbd></h4>
             </div>

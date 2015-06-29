@@ -3,11 +3,11 @@
  */
 
 function Index($scope, $http){
+    $scope.WRITE_ABLE = true;
     var json = "data/type.json";
     $http.get(json + "?t=" + (new Date()).getTime()).success(function(data){
         $scope.list = data;
     });
-
 
     $scope.save_me = function (callback) {
         $http.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";

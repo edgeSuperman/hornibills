@@ -3,7 +3,7 @@
  */
 
 function Api($scope, $http, $routeParams,$location, $anchorScroll,$timeout) {
-
+    $scope.WRITE_ABLE = true;
     var href = $routeParams.href;
 
     $scope.href= href;
@@ -31,32 +31,18 @@ function Api($scope, $http, $routeParams,$location, $anchorScroll,$timeout) {
                 "Default": "",
                 "Type": "string",
                 "Description": "Description of the first parameter."
-            },
-            {
-                "Name": "userId",
-                "Required": "Y",
-                "Default": "",
-                "Type": "string",
-                "Description": "The userId parameter that is in the URI."
             }
         ],
         "response":[
             {
-                "Name": "param_1_name",
+                "Name": "response_1",
                 "Required": "Y",
                 "Default": "",
                 "Type": "string",
                 "Description": "Description of the first parameter."
-            },
-            {
-                "Name": "userId",
-                "Required": "Y",
-                "Default": "",
-                "Type": "string",
-                "Description": "The userId parameter that is in the URI."
             }
         ],
-        "demo": "<?php \n\r var_dump(123);"
+        "demo": ""
     };
 
     $scope.TYPES = [
