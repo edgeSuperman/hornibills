@@ -31,11 +31,18 @@ function Api($scope, $http, $routeParams,$location, $anchorScroll,$timeout) {
                 "Default": "",
                 "Type": "string",
                 "Description": "Description of the first parameter."
+            },
+            {
+                "Name": "userId",
+                "Required": "Y",
+                "Default": "",
+                "Type": "string",
+                "Description": "The userId parameter that is in the URI."
             }
         ],
         "response":[
             {
-                "Name": "response_1",
+                "Name": "param_1_name",
                 "Required": "Y",
                 "Default": "",
                 "Type": "string",
