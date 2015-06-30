@@ -68,7 +68,7 @@
                             <td><input type="checkbox" ng-true-value="Y" ng-false-value="N" ng-model="param.Required"/></td>
                             <td>
                                 <select ng-model="param.Type">
-                                    <option ng-repeat="item in TYPES" ng-select="param.Type == item" value="{{item}}">{{item}}</option>
+                                    <option ng-repeat="item in TYPES" ng-selected="param.Type == item" value="{{item}}">{{item}}</option>
                                    </select>
                             </td>
                             <td><textarea style="width: 400px;" ng-model="param.Description"></textarea></td>
@@ -103,7 +103,7 @@
                             <td><input type="checkbox" ng-true-value="Y" ng-false-value="N" ng-model="param.Required"/></td>
                             <td>
                                 <select ng-model="param.Type">
-                                    <option ng-repeat="item in TYPES" ng-select="param.Type == item" value="{{item}}">{{item}}</option>
+                                    <option ng-repeat="item in TYPES" ng-selected="param.Type == item" value="{{item}}">{{item}}</option>
                                 </select>
                             </td>
                             <td><textarea style="width: 400px;" ng-model="param.Description"></textarea></td>
