@@ -200,6 +200,11 @@
                     </tbody>
                 </table>
                 </div>
+                <h5 ng-show="item.response_demo">返回示例</h5>
+                <div ng-show="item.response_demo">
+                    <pre>{{item.response_demo}}</pre>
+                </div>
+                <br />
                 <div ng-show="item.params.length > 0">
                     <h5>接口测试</h5>
                     <form class="form-horizontal" name="testForm" method="POST" target="_blank" action="{{DOMAIN + item.url}}">
@@ -225,13 +230,9 @@
                         <p>&nbsp;</p>
                     </form>
                 </div>
-                <h4 ng-show="item.demo">测试代码:</h4>
+                <h5 ng-show="item.demo">测试示例</h5>
                 <div ng-show="item.demo">
                     <pre>{{item.demo}}</pre>
-                </div>
-                <h4 ng-show="item.response_demo">返回示例:</h4>
-                <div ng-show="item.response_demo">
-                    <pre>{{item.response_demo}}</pre>
                 </div>
             </div>
         </div>
