@@ -110,7 +110,7 @@ function Api($scope, $http, $routeParams,$location, $anchorScroll,$timeout) {
             return;
         }
         if($scope.isNew) {
-            $scope.list.unshift($scope.current);
+            $scope.list.push($scope.current);
         }
         else {
             angular.extend($scope.edit_api, $scope.current);
