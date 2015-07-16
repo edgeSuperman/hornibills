@@ -6,7 +6,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <h3>分类 -
-        <button class="btn btn-xs btn-info" ng-click="show_edit = !show_edit">{{!show_edit?'编辑分类':'关闭编辑'}}</button>
+        <button class="btn btn-xs btn-info" ng-click="show_edit = !show_edit" ng-show="WRITE_ABLE">{{!show_edit?'编辑分类':'关闭编辑'}}</button>
         </h3>
     </div>
     <div class="panel-body">
@@ -32,7 +32,7 @@
 
     </div>
     <div class="panel-footer">
-        <a class="btn btn-default" href="#/add">新建分类</a>
+        <a class="btn btn-default" href="#/add" ng-show="WRITE_ABLE">新建分类</a>
     </div>
     </div>
 

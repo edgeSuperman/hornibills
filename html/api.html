@@ -5,9 +5,8 @@
 </ol>
 <div style="position: fixed; left: 0; top: 100px;" >
     <div class="btn-group-vertical">
-        <button  class="btn btn-success" ng-click="add();">Add</button>
-        <button  class="btn btn-default btn-xs" ng-click="menu=!menu">{{!menu?'展开':'收起'}}目录</button>
-            <a ng-show="!!menu" ng-repeat="item in list" class="btn btn-default btn-xs" ng-href="#/api/{{href}}/{{item.name}}">{{item.name}}</a>
+        <button  class="btn btn-success" ng-click="add();" ng-show="WRITE_ABLE">Add</button>
+            <a ng-repeat="item in list" class="btn btn-default btn-xs" ng-href="#/api/{{href}}/{{item.name}}">{{item.name}}</a>
     </div>
 </div>
 
@@ -37,7 +36,7 @@
                 <label for="method"  class="col-sm-2 control-label">method:</label>
                 <div class="col-sm-10">
                     <select id="method" ng-model="current.method">
-                        <option ng-repeat="item in METHODS" ng-select="current.method == item" value="{{item}}">{{item}}</option>
+                        <option ng-repeat="item in METHODS" ng-selected="current.method == item" value="{{item}}">{{item}}</option>
                     </select>
                 </div>
             </div>
@@ -69,7 +68,7 @@
                             <td><input type="checkbox" ng-true-value="Y" ng-false-value="N" ng-model="param.Required"/></td>
                             <td>
                                 <select ng-model="param.Type">
-                                    <option ng-repeat="item in TYPES" ng-select="param.Type == item" value="{{item}}">{{item}}</option>
+                                    <option ng-repeat="item in TYPES" ng-selected="param.Type == item" value="{{item}}">{{item}}</option>
                                    </select>
                             </td>
                             <td><textarea style="width: 400px;" ng-model="param.Description"></textarea></td>
@@ -104,7 +103,7 @@
                             <td><input type="checkbox" ng-true-value="Y" ng-false-value="N" ng-model="param.Required"/></td>
                             <td>
                                 <select ng-model="param.Type">
-                                    <option ng-repeat="item in TYPES" ng-select="param.Type == item" value="{{item}}">{{item}}</option>
+                                    <option ng-repeat="item in TYPES" ng-selected="param.Type == item" value="{{item}}">{{item}}</option>
                                 </select>
                             </td>
                             <td><textarea style="width: 400px;" ng-model="param.Description"></textarea></td>
@@ -117,8 +116,15 @@
                 </div>
             </div>
             <div class="form-group">
+                <label class="col-sm-2 control-label">测试代码:</label>
                 <div class="col-sm-offset-2 col-sm-10">
                     <textarea ng-model="current.demo" style="width: 100%;height: 300px;"></textarea>
+                    </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">返回示例:</label>
+                <div class="col-sm-offset-2 col-sm-10">
+                    <textarea ng-model="current.response_demo" style="width: 100%;height: 300px;"></textarea>
                     </div>
             </div>
             <div class="form-group">
@@ -141,8 +147,8 @@
             <div id="{{item.name}}" class="panel-heading">
                 <h3 class="panel-title">
                     {{item.name}}
-                    <button class="btn btn-info btn-xs pull-right" ng-click="edit(item);">edit</button>
-                    <button class="btn btn-danger btn-xs pull-right" style="margin-right: 5px;" ng-click="remove(list, item); save_me();">delete</button>
+                    <button class="btn btn-info btn-xs pull-right" ng-click="edit(item);" ng-show="WRITE_ABLE">edit</button>
+                    <button class="btn btn-danger btn-xs pull-right" style="margin-right: 5px;" ng-click="remove(list, item); save_me();" ng-show="WRITE_ABLE">delete</button>
                 </h3>
                 <h4><kbd>{{item.method || 'GET'}}</kbd> - <kbd>{{item.url}}</kbd></h4>
             </div>
@@ -193,8 +199,38 @@
                     </tr>
                     </tbody>
                 </table>
-                    </div>
-                <h4 ng-show="item.demo">Demo:</h4>
+                </div>
+                <h5 ng-show="item.response_demo">返回示例</h5>
+                <div ng-show="item.response_demo">
+                    <pre>{{item.response_demo}}</pre>
+                </div>
+                <br />
+                <div ng-show="item.params.length > 0">
+                    <h5>接口测试</h5>
+                    <form class="form-horizontal" name="testForm" method="POST" target="_blank" action="{{DOMAIN + item.url}}">
+                        <div class="form-group">
+                            <div class="col-sm-10">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>参数名</th>
+                                        <th>值</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr ng-repeat="param in item.params">
+                                        <td>{{param.Name}}</td>
+                                        <td><input type="text" class="form-control" name="{{param.Name}}" value="{{param.Default}}"  /></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <p><button class="btn btn-primary">测试</button></p>
+                        <p>&nbsp;</p>
+                    </form>
+                </div>
+                <h5 ng-show="item.demo">测试示例</h5>
                 <div ng-show="item.demo">
                     <pre>{{item.demo}}</pre>
                 </div>
