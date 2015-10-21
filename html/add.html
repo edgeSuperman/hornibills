@@ -1,34 +1,32 @@
-
-
 <ol class="breadcrumb">
     <li><a href="#/">Home</a></li>
     <li class="active">{{href?'修改':'添加'}}分类</li>
 </ol>
-
-    <form class="form-horizontal" name="typeForm" role="form">
-        <div class="form-group">
-            <label for="name" class="col-sm-2 control-label">分类名:</label>
-            <div class="col-sm-10">
-                <input type="text" name="name" class="form-control" required ng-model="current.name" id="name" placeholder="分类(in chinese)">
-                <span class=" error" ng-show="typeForm.name.$error.required">请填写分类名</span>
-            </div>
+<form id="typeform" class="form-horizontal" name="typeForm" role="form">
+    <div class="form-group">
+        <label for="name" class="col-sm-2 control-label">分类名:</label>
+        <div class="col-sm-10">
+            <input type="text" name="name" class="form-control" required ng-model="current.name" id="name" placeholder="分类(in chinese)">
+            <span class=" error" ng-show="typeForm.name.$error.required">请填写分类名</span>
         </div>
-        <div ng-if="!href" class="form-group">
-            <label for="module" class="col-sm-2 control-label">英文名:</label>
-            <div class="col-sm-10">
-                <input type="text" class="form-control" name="href" required id="module" ng-model="current.href" placeholder="分类(in english)">
-                <span class="error" ng-show="typeForm.href.$error.required">请填写分类名</span>
-            </div>
+    </div>
+    <!--<div ng-if="!href" class="form-group">-->
+    <div class="form-group">
+        <label for="module" class="col-sm-2 control-label">英文名:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="href" required id="module" ng-model="current.href" placeholder="分类(in english)">
+            <span class="error" ng-show="typeForm.href.$error.required">请填写分类名</span>
         </div>
-        <div class="form-group">
-            <label for="module" class="col-sm-2 control-label">描述:</label>
-            <div class="col-sm-10">
-                <textarea  name="description" ng-model="current.description" style="width: 100%; height: 100px;"  placeholder="描述"></textarea>
-            </div>
+    </div>
+    <div class="form-group">
+        <label for="module" class="col-sm-2 control-label">描述:</label>
+        <div class="col-sm-10">
+            <textarea  name="description" ng-model="current.description" style="width: 100%; height: 100px;"  placeholder="描述"></textarea>
         </div>
-        <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-                <button ng-click="save();" type="submit" class="btn btn-default">保存</button>
-            </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button ng-click="save(current._id || '');" type="submit" class="btn btn-default">保存</button>
         </div>
-    </form>
+    </div>
+</form>

@@ -60,7 +60,7 @@ function Api($scope, $http, $routeParams, $location, $anchorScroll, $timeout) {
         "string", "int"
     ];
     $scope.METHODS = [
-        "GET", "POST" , "PUT"
+        "GET", "POST", "PUT", "PATCH", "COPY", "HEAD", "OPTIONS", "DELETE"
     ];
     $scope.add = function () {
         $scope.current = angular.copy(empty);
