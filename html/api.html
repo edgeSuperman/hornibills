@@ -1,24 +1,21 @@
-
 <ol id="top" class="breadcrumb">
     <li><a href="#/">Home</a></li>
-    <li class="active">{{href}}</li>
+    <li class="active">{{parent.name}}</li>
 </ol>
-<div style="position: fixed; left: 0; top: 100px;" >
+<div style="position: fixed; left: 0; top: 124px;max-height:400px;overflow-y:scroll;box-shadow: 6px 3px 25px 11px #ccc">
     <div class="btn-group-vertical">
         <button  class="btn btn-success" ng-click="add();">Add</button>
-        <button  class="btn btn-default btn-xs" ng-click="menu=!menu">{{!menu?'展开':'收起'}}目录</button>
-            <a ng-show="!!menu" ng-repeat="item in list" class="btn btn-default btn-xs" ng-href="#/api/{{href}}/{{item.name}}">{{item.name}}</a>
+        <button  class="btn btn-default btn-xs" ng-click="menu = !menu">{{!menu?'展开':'收起'}}目录</button>
+        <a style="text-align:left;" ng-show="!!menu" ng-repeat="item in list" class="btn btn-default btn-xs" ng-href="#/api/{{href}}/{{item.name}}">{{item.name}}</a>
     </div>
 </div>
-
-        <div style="position: fixed;right: 0; bottom: 20px;">
-            <button class="btn btn-info" ng-click="back();">回到顶部</button>
-        </div>
-
+<div style="position: fixed;right: 0; bottom: 20px;">
+    <button class="btn btn-info" ng-click="back();">回到顶部</button>
+</div>
 <div>
-
     <div ng-show="current" >
-        <form class="form-horizontal" name="apiForm" role="form">
+        <form id="apiform" class="form-horizontal" name="apiForm" role="form">
+            <input type="hidden" id="parentid" name="parent" value="{{parent._id}}" />
             <div class="form-group">
                 <label for="name" class="col-sm-2 control-label">接口名:</label>
                 <div class="col-sm-10">
@@ -36,7 +33,7 @@
             <div class="form-group">
                 <label for="method"  class="col-sm-2 control-label">method:</label>
                 <div class="col-sm-10">
-                    <select id="method" ng-model="current.method">
+                    <select name="method" id="method" ng-model="current.method">
                         <option ng-repeat="item in METHODS" ng-select="current.method == item" value="{{item}}">{{item}}</option>
                     </select>
                 </div>
@@ -51,37 +48,37 @@
                 <div class="col-sm-10">
                     <table class="table">
                         <thead>
-                        <tr>
-                            <th>参数名</th>
-                            <th>默认值</th>
-                            <th>必传</th>
-                            <th>类型</th>
-                            <th>描述</th>
-                            <th>
-                                <button class="btn btn-success" ng-click="add_param(current)">新增</button>
-                            </th>
-                        </tr>
+                            <tr>
+                                <th>参数名</th>
+                                <th>默认值</th>
+                                <th>必传</th>
+                                <th>类型</th>
+                                <th>描述</th>
+                                <th>
+                                    <button class="btn btn-success" ng-click="add_param(current)">新增</button>
+                                </th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="param in current.params">
-                            <td><input type="text" ng-model="param.Name"/></td>
-                            <td><input type="text" ng-model="param.Default"/></td>
-                            <td><input type="checkbox" ng-true-value="Y" ng-false-value="N" ng-model="param.Required"/></td>
-                            <td>
-                                <select ng-model="param.Type">
-                                    <option ng-repeat="item in TYPES" ng-select="param.Type == item" value="{{item}}">{{item}}</option>
-                                   </select>
-                            </td>
-                            <td><textarea style="width: 400px;" ng-model="param.Description"></textarea></td>
-                            <td>
-                                <button class="btn btn-danger" ng-click="remove(current.params, param)">删除</button>
-                            </td>
-                        </tr>
+                            <tr ng-repeat="(i,param) in current.params">
+                                <td><input name="params[{{i}}][Name]" type="text" ng-model="param.Name"/></td>
+                                <td><input name="params[{{i}}][Default]" type="text" ng-model="param.Default"/></td>
+                                <td><input name="params[{{i}}][Required]" type="checkbox" ng-true-value="Y" ng-false-value="N" ng-model="param.Required"/></td>
+                                <td>
+                                    <select name="params[{{i}}][Type]" ng-model="param.Type">
+										<option ng-repeat="item in TYPES" ng-selected="param.Type == item" value="{{item}}">{{item}}</option>
+                                    </select>
+                                </td>
+                                <td><textarea name="params[{{i}}][Description]" style="width: 400px;" ng-model="param.Description"></textarea></td>
+                                <td>
+                                    <button class="btn btn-danger" ng-click="remove(current.params, param,true)">删除</button>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-            <div class="form-group">
+            <!--<div class="form-group">
                 <label class="col-sm-2 control-label">参数:</label>
                 <div class="col-sm-10">
                     <table class="table">
@@ -115,11 +112,12 @@
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </div>-->
             <div class="form-group">
+                <label class="col-sm-2 control-label">响应:</label>
                 <div class="col-sm-offset-2 col-sm-10">
-                    <textarea ng-model="current.demo" style="width: 100%;height: 300px;"></textarea>
-                    </div>
+                    <textarea name="demo" ng-model="current.demo" style="width: 100%;height: 300px;"></textarea>
+                </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
@@ -129,22 +127,20 @@
             </div>
         </form>
     </div>
-
-
     <div ng-show="!current">
         <div class="clearfix" style="margin: 5px;">
             <label class="pull-right" for="search">
-                <input placeholder="search here" id="search" class="form-control input-sm " ng-model="search" style="width: 300px;" type="search"/>
+                <input placeholder="search here" id="search" class="form-control input-sm " ng-model="search" style="width: 300px;" type="text"/>
             </label>
-           </div>
-        <div class="panel panel-default" ng-repeat="item in list|filter: search">
+        </div>
+        <div class="panel panel-default" ng-repeat="item in list|filter:search">
             <div id="{{item.name}}" class="panel-heading">
                 <h3 class="panel-title">
                     {{item.name}}
                     <button class="btn btn-info btn-xs pull-right" ng-click="edit(item);">edit</button>
-                    <button class="btn btn-danger btn-xs pull-right" style="margin-right: 5px;" ng-click="remove(list, item); save_me();">delete</button>
+                    <button class="btn btn-danger btn-xs pull-right" style="margin-right: 5px;" ng-click="remove(list, item,false);">delete</button>
                 </h3>
-                <h4><kbd>{{item.method || 'GET'}}</kbd> - <kbd>{{item.url}}</kbd></h4>
+                <h4><kbd>{{item.method|| 'GET'}}</kbd> - <kbd>{{item.url}}</kbd></h4>
             </div>
             <div class="panel-body">
                 <div class="alert alert-info">{{item.description}}</div>
@@ -152,26 +148,26 @@
                     <h5>请求参数</h5>
                     <table class="table">
                         <thead>
-                        <tr>
-                            <th>参数名</th>
-                            <th>必传</th>
-                            <th>默认值</th>
-                            <th>类型</th>
-                            <th>描述</th>
-                        </tr>
+                            <tr>
+                                <th>参数名</th>
+                                <th>必传</th>
+                                <th>默认值</th>
+                                <th>类型</th>
+                                <th>描述</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="param in item.params">
-                            <td>{{param.Name}}</td>
-                            <td>{{param.Required}}</td>
-                            <td>{{param.Default || "-"}}</td>
-                            <td>{{param.Type}}</td>
-                            <td>{{param.Description}}</td>
-                        </tr>
+                            <tr ng-repeat="param in item.params">
+                                <td>{{param.Name}}</td>
+                                <td>{{param.Required}}</td>
+                                <td>{{param.Default|| "-"}}</td>
+                                <td>{{param.Type}}</td>
+                                <td>{{param.Description}}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
-                <div ng-show="item.response.length > 0">
+                <!--<div ng-show="item.response.length > 0">
                 <h5>返回值</h5>
                 <table class="table">
                     <thead>
@@ -193,13 +189,12 @@
                     </tr>
                     </tbody>
                 </table>
-                    </div>
-                <h4 ng-show="item.demo">Demo:</h4>
+                    </div>-->
+                <h4 ng-show="item.demo">响应:</h4>
                 <div ng-show="item.demo">
                     <pre>{{item.demo}}</pre>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
